@@ -29,8 +29,6 @@ let
       "LOONGARCH64"
     else
       throw "Unsupported architecture";
-
-  buildType = if stdenv.hostPlatform.isDarwin then "CLANGPDB" else "GCC5";
 in
 
 stdenv.mkDerivation (finalAttrs: {
@@ -120,6 +118,8 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   installPhase = ''
+    runHook preInstall
+
     mkdir -vp $out
     mv -v BaseTools $out
     mv -v edksetup.sh $out
@@ -128,6 +128,8 @@ stdenv.mkDerivation (finalAttrs: {
       chmod +x "$i"
       patchShebangs --build "$i"
     done
+
+    runHook postInstall
   '';
 
   enableParallelBuilding = true;
@@ -168,6 +170,7 @@ stdenv.mkDerivation (finalAttrs: {
         finalAttrsInner:
         let
           attrs = lib.toFunction attrsOrFun finalAttrsInner;
+          buildType = attrs.buildType or (if stdenv.hostPlatform.isDarwin then "CLANGPDB" else "GCC5");
         in
         {
           inherit (finalAttrs) src;

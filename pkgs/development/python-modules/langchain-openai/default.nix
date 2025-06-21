@@ -17,6 +17,7 @@
   lark,
   pandas,
   pytest-asyncio,
+  pytest-cov-stub,
   pytestCheckHook,
   pytest-mock,
   pytest-socket,
@@ -31,22 +32,17 @@
 
 buildPythonPackage rec {
   pname = "langchain-openai";
-  version = "0.3.21";
+  version = "0.3.23";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "langchain-ai";
     repo = "langchain";
     tag = "langchain-openai==${version}";
-    hash = "sha256-QGYDwK9HYntb8RJcFYzavr14taVfgZedzLkZKaw4I/g=";
+    hash = "sha256-o/DDHV2niEDp0kFJ+XuUXH7TSL/cBXwrI4lYLyD2SHc=";
   };
 
   sourceRoot = "${src.name}/libs/partners/openai";
-
-  preConfigure = ''
-    substituteInPlace pyproject.toml \
-      --replace-fail "--cov=langchain_openai" ""
-  '';
 
   build-system = [ pdm-backend ];
 
@@ -68,6 +64,7 @@ buildPythonPackage rec {
     lark
     pandas
     pytest-asyncio
+    pytest-cov-stub
     pytestCheckHook
     pytest-mock
     pytest-socket
