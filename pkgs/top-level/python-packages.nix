@@ -13292,6 +13292,8 @@ self: super: with self; {
 
   pylibjpeg-openjpeg = callPackage ../development/python-modules/pylibjpeg-openjpeg { };
 
+  pylibjpeg-rle = callPackage ../development/python-modules/pylibjpeg-rle { };
+
   pyliblo3 = callPackage ../development/python-modules/pyliblo3 { };
 
   pylibmc = callPackage ../development/python-modules/pylibmc { };
@@ -14968,6 +14970,8 @@ self: super: with self; {
   python-pipedrive = callPackage ../development/python-modules/python-pipedrive { };
 
   python-pkcs11 = callPackage ../development/python-modules/python-pkcs11 { };
+
+  python-pooldose = callPackage ../development/python-modules/python-pooldose { };
 
   python-poppler = callPackage ../development/python-modules/python-poppler { };
 
@@ -19725,8 +19729,6 @@ self: super: with self; {
   );
 
   vttlib = callPackage ../development/python-modules/vttlib { };
-
-  vulcan-api = callPackage ../development/python-modules/vulcan-api { };
 
   vulkan = callPackage ../development/python-modules/vulkan { };
 
